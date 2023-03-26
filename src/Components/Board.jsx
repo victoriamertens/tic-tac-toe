@@ -5,12 +5,15 @@ import '/Users/victoriamertens/Documents/Prime Academy Docs /Graduation-Projects
 import { useState } from 'react';
 
 export function Board() {
-  let [box1, setBox1] = useState('Box 1');
   let [player, setPlayer] = useState('X');
+  let [boardData, setBoardData] = useState(Array.apply(null, Array(9)));
+  console.log(typeof boardData);
 
   let handleClick = (boxNum, player) => {
-    console.log(boxNum, player, box1);
-    setBox1(player);
+    let cloneArr = [...boardData];
+    cloneArr[boxNum] = player;
+    console.log(cloneArr);
+    setBoardData(cloneArr);
     if (player === 'X') {
       setPlayer('O');
     }
@@ -19,8 +22,21 @@ export function Board() {
     }
   };
   return (
-    <div class="container">
-      <Box handleClick={handleClick} state={box1} id="1" player={player} />
+    <div className="container">
+      {console.log(typeof boardData)}
+      {boardData.map((el, index) => {
+        return (
+          <Box
+            key={index}
+            className="box"
+            handleClick={handleClick}
+            state={el}
+            player={player}
+            id={index}
+          />
+        );
+      })}
+      {/* <Box handleClick={handleClick} id="1" player={player} />
       <div id="box2" class="box" onClick={() => handleClick(1, player)}>
         Box 2
       </div>
@@ -44,7 +60,7 @@ export function Board() {
       </div>
       <div id="box9" class="box">
         Box 9
-      </div>
+      </div> */}
     </div>
   );
 }
