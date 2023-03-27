@@ -1,7 +1,6 @@
 import React from 'react';
 
 export function Box({ id, state, handleClick, player }) {
-  console.log(handleClick);
   return (
     <button
       id={id}

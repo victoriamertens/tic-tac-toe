@@ -7,13 +7,18 @@ import { useState } from 'react';
 export function Board() {
   let [player, setPlayer] = useState('X');
   let [boardData, setBoardData] = useState(Array.apply(null, Array(9)));
-  console.log(typeof boardData);
+  let [winner, setWinner] = useState(false);
+
+  let handleWinner = () => {
+    console.log('Checking winner');
+  };
 
   let handleClick = (boxNum, player) => {
     let cloneArr = [...boardData];
     cloneArr[boxNum] = player;
     console.log(cloneArr);
     setBoardData(cloneArr);
+    handleWinner();
     if (player === 'X') {
       setPlayer('O');
     }
@@ -37,7 +42,8 @@ export function Board() {
           );
         })}
       </div>
-      <p>Player {player}, it is your turn!</p>
+      {winner && <p>Player {player} you won!</p>}
+      {!winner && <p>Player {player}, it is your turn!</p>}
     </>
   );
 }
