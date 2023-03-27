@@ -22,45 +22,22 @@ export function Board() {
     }
   };
   return (
-    <div className="container">
-      {console.log(typeof boardData)}
-      {boardData.map((el, index) => {
-        return (
-          <Box
-            key={index}
-            className="box"
-            handleClick={handleClick}
-            state={el}
-            player={player}
-            id={index}
-          />
-        );
-      })}
-      {/* <Box handleClick={handleClick} id="1" player={player} />
-      <div id="box2" class="box" onClick={() => handleClick(1, player)}>
-        Box 2
+    <>
+      <div className="container">
+        {boardData.map((el, index) => {
+          return (
+            <Box
+              key={index}
+              className="box"
+              handleClick={handleClick}
+              state={el}
+              player={player}
+              id={index}
+            />
+          );
+        })}
       </div>
-      <div id="box3" class="box">
-        Box 3
-      </div>
-      <div id="box4" class="box">
-        Box 4
-      </div>
-      <div id="box5" class="box">
-        Box 5
-      </div>
-      <div id="box6" class="box">
-        Box 6
-      </div>
-      <div id="box7" class="box">
-        Box 7
-      </div>
-      <div id="box8" class="box">
-        Box 8
-      </div>
-      <div id="box9" class="box">
-        Box 9
-      </div> */}
-    </div>
+      <p>Player {player}, it is your turn!</p>
+    </>
   );
 }
