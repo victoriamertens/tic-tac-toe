@@ -7,7 +7,6 @@ import { useState } from 'react';
 export function Board() {
   let [player, setPlayer] = useState('X');
   let [boardData, setBoardData] = useState(Array.apply(null, Array(9)));
-  let [winner, setWinner] = useState(false);
 
   let winningConfig = [
     [0, 1, 2],
@@ -21,7 +20,6 @@ export function Board() {
   ];
 
   let handleWinner = () => {
-    console.log('Checking winner');
     for (let win of winningConfig) {
       if (
         boardData[win[0]] === undefined ||
