@@ -51,6 +51,8 @@ export function Board() {
       setPlayer('X');
     }
   };
+
+  let winnerFinal = handleWinner();
   return (
     <>
       <div className="container">
@@ -63,13 +65,14 @@ export function Board() {
               state={el}
               player={player}
               id={index}
+              winner={winnerFinal}
             />
           );
         })}
       </div>
-      {handleWinner() && player === 'O' && <p>Player X you won!</p>}
-      {handleWinner() && player === 'X' && <p>Player O you won!</p>}
-      {!handleWinner() && <p>Player {player}, it is your turn!</p>}
+      {winnerFinal && player === 'O' && <p>Player X you won!</p>}
+      {winnerFinal && player === 'X' && <p>Player O you won!</p>}
+      {!winnerFinal && <p>Player {player}, it is your turn!</p>}
     </>
   );
 }
