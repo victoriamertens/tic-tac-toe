@@ -9,8 +9,33 @@ export function Board() {
   let [boardData, setBoardData] = useState(Array.apply(null, Array(9)));
   let [winner, setWinner] = useState(false);
 
+  let winningConfig = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 7],
+  ];
+
   let handleWinner = () => {
     console.log('Checking winner');
+    for (let win of winningConfig) {
+      if (
+        boardData[win[0]] === undefined ||
+        boardData[win[1]] === undefined ||
+        boardData[win[2]] === undefined
+      ) {
+        console.log('No winners yet:');
+      } else if (
+        boardData[win[0]] === boardData[win[1]] &&
+        boardData[win[1]] === boardData[win[2]]
+      ) {
+        return true;
+      }
+    }
   };
 
   let handleClick = (boxNum, player) => {
@@ -18,7 +43,7 @@ export function Board() {
     cloneArr[boxNum] = player;
     console.log(cloneArr);
     setBoardData(cloneArr);
-    handleWinner();
+
     if (player === 'X') {
       setPlayer('O');
     }
@@ -42,8 +67,9 @@ export function Board() {
           );
         })}
       </div>
-      {winner && <p>Player {player} you won!</p>}
-      {!winner && <p>Player {player}, it is your turn!</p>}
+      {handleWinner() && player === 'O' && <p>Player X you won!</p>}
+      {handleWinner() && player === 'X' && <p>Player O you won!</p>}
+      {!handleWinner() && <p>Player {player}, it is your turn!</p>}
     </>
   );
 }
